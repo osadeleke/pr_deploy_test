@@ -16,7 +16,7 @@ sshpass -p $SERVER_PASSWORD ssh -o StrictHostKeyChecking=no -p $SERVER_PORT $SER
   # fi
   git clone $REPO_URL $PATH
 
-  PROJECT_NAME=$(basename -s .git $REPO_URL)
+  PROJECT_NAME=\$(basename -s .git $REPO_URL)
   cd $PROJECT_NAME
 
 
