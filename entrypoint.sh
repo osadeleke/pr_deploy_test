@@ -19,8 +19,8 @@ PATH="/srv/hngprojects"
 CONTAINER_NAME="${BRANCH_NAME}_${PR_NUMBER}_container"
 echo "Starting deployment..."
 
-sudo apt-get update
-sudo apt-get install ssh docker.io basename
+apt-get update
+apt-get install ssh docker.io basename
 ssh -o StrictHostKeyChecking=no -p $SERVER_PORT $SERVER_USERNAME@$SERVER_HOST << EOF
   set -e
 
