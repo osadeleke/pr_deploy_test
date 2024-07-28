@@ -12,10 +12,10 @@ jobs:
       - id: workflow
         uses: hngprojects/pr-deploy
         with:
-          server_host: ${{ secrets.host }}
-          server_username: ${{ secrets.username  }}
-          server_password: ${{ secrets.password  }}
-          server_port: ${{ secrets.port  }}
+          server_host: ${{ secrets.HOST }}
+          server_username: ${{ secrets.USERNAME  }}
+          server_password: ${{ secrets.PASSWORD  }}
+          server_port: ${{ secrets.PORT  }}
           dir: "."
           dockerfile: "Dockerfile"
           # compose_file: ${{ variables.docker_compose }}
