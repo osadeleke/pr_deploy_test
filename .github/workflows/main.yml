@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: workflow
-        uses: hngprojects/pr-deploy
+        uses: ./
         with:
           server_host: ${{ secrets.HOST }}
           server_username: ${{ secrets.USERNAME  }}
