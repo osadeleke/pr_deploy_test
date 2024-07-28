@@ -21,7 +21,7 @@ sshpass -p $SERVER_PASSWORD ssh -o StrictHostKeyChecking=no -p $SERVER_PORT $SER
 
 
   # echo "Checking for existing container..."
-  # if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
+  # if [ "\$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
   #   echo "Stopping and removing existing container..."
   #   docker rm -f $CONTAINER_NAME
   # fi
