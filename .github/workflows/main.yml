@@ -1,0 +1,26 @@
+name: Pull request deploy
+on:
+  pull_request:
+    types: [opened, reopened, closed, synchronize]
+
+jobs:
+  pr_deploy:
+    runs-on: ubuntu-latest
+    name: Deploying PR
+    steps:
+      - uses: actions/checkout@v4
+      - id: workflow
+        uses: hngprojects/pr-deploy
+        with:
+          server_host: ${{ secrets.host }}
+          server_username: ${{ secrets.username  }}
+          server_password: ${{ secrets.password  }}
+          server_port: ${{ secrets.port  }}
+          dir: "."
+          dockerfile: "Dockerfile"
+          # compose_file: ${{ variables.docker_compose }}
+          exposed_port: "3000"
+          branch_name: ${{ github.pull_request.head.ref }}
+          repo_url: ${{ github.pull_request.head.repo.clone_url }}
+          pr_number: ${{ github.event.pull_request.number }}
+          # env: ${{ env }}
