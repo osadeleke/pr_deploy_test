@@ -57,7 +57,9 @@ runs:
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
     - name: Run entrypoint.sh
-      run: sudo chmod +x entrypoint.sh && ./entrypoint.sh
+      run: |
+        sudo apt-get update -y
+        sudo chmod +x entrypoint.sh && ./entrypoint.sh
       shell: bash
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
