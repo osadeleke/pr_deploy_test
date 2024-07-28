@@ -16,7 +16,7 @@ sshpass -p $SERVER_PASSWORD ssh -o StrictHostKeyChecking=no -p $SERVER_PORT $SER
   # fi
   git clone $REPO_URL $PATH
 
-  PROJECT_NAME=\$(basename -s .git $REPO_URL)
+  PROJECT_NAME=\$(basename -s .git \$REPO_URL)
   cd $PROJECT_NAME
 
 
@@ -37,9 +37,9 @@ sshpass -p $SERVER_PASSWORD ssh -o StrictHostKeyChecking=no -p $SERVER_PORT $SER
         echo "Dockerfile not found in the specified path: $DOCKERFILE"
         exit 1;
       fi
-    build_output=$(docker build -t $CONTAINER_NAME -f $DOCKERFILE 2>&1)
+    build_output=\$(docker build -t $CONTAINER_NAME -f $DOCKERFILE 2>&1)
     echo "$build_output"
-    run_output=$(docker run -d --name $CONTAINER_NAME -p $EXPOSED_PORT:$EXPOSED_PORT --env $ENV_VARS $CONTAINER_NAME 2>&1)
+    run_output=\$(docker run -d --name $CONTAINER_NAME -p $EXPOSED_PORT:$EXPOSED_PORT --env $ENV_VARS $CONTAINER_NAME 2>&1)
     echo "$run_output"
   elif [[ -n "$COMPOSE_FILE" ]]; then
     if [ ! -f "$COMPOSE_FILE" ]; then
@@ -48,9 +48,9 @@ sshpass -p $SERVER_PASSWORD ssh -o StrictHostKeyChecking=no -p $SERVER_PORT $SER
         exit 1;
     fi
     echo "docker-compose.yml detected. Building and deploying using Docker Compose..."
-    down_output=$(docker-compose down 2>&1)
+    down_output=\$(docker-compose down 2>&1)
     echo "$down_output"
-    up_output=$(docker-compose up -d --build 2>&1)
+    up_output=\$(docker-compose up -d --build 2>&1)
     echo "$up_output"
   else
     echo "No Dockerfile or docker-compose.yml found. Running start command..."
@@ -61,11 +61,11 @@ sshpass -p $SERVER_PASSWORD ssh -o StrictHostKeyChecking=no -p $SERVER_PORT $SER
 
   echo "Deployment completed. Container name: $CONTAINER_NAME"
   echo "Container status:"
-  status_output=$(docker ps -f name=$CONTAINER_NAME 2>&1)
+  status_output=\$(docker ps -f name=$CONTAINER_NAME 2>&1)
   echo "$status_output"
 
   echo "Fetching container logs..."
-  logs_output=$(docker logs $CONTAINER_NAME 2>&1)
+  logs_output=\$(docker logs $CONTAINER_NAME 2>&1)
   echo "$logs_output"
 EOF
 echo "Deployment script executed."
